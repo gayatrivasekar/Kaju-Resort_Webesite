@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="/css/book.css" />
+    <title>Kaju Resort | Kolhapur</title>
+  </head>
+
+  <body>
+    <div class="blur-div"></div>
+    <section class="book-section">
+      <div class="book-form">
+        <h3 style="color: #f9ba00">Book your suite now...</h3>
+        <form id="formId">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="mobile">Mobile No:</label>
+              <input type="tel" id="mobile" name="mobile" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="guests">Number of Guests:</label>
+              <input type="number" id="guests" name="guests" min="1" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="arrival">Arrival Date:</label>
+              <input type="date" id="arrival" name="arrival" required />
+            </div>
+            <div class="form-group">
+              <label for="departure">Departure Date:</label>
+              <input type="date" id="departure" name="departure" required />
+            </div>
+          </div>
+          <div class="form-row form-check">
+            <label style="color: black">Room Type:</label>
+            <div class="checkbox-container">
+              <div class="checkbox-item">
+                <input
+                  type="checkbox"
+                  class="check"
+                  id="first-suite"
+                  name="room-type"
+                  value="first"
+                  onchange="updateRoomInfo('first')"
+                />
+                <label for="first-suite">First Suite (399.00 INR)</label>
+              </div>
+              <div class="checkbox-item">
+                <input
+                  type="checkbox"
+                  class="check"
+                  id="second-suite"
+                  name="room-type"
+                  value="second"
+                  onchange="updateRoomInfo('second')"
+                />
+                <label for="second-suite">Second Suite (599.00 INR)</label>
+              </div>
+            </div>
+            <div class="checkbox-container">
+              <div class="checkbox-item">
+                <input
+                  type="checkbox"
+                  class="check"
+                  id="luxury-penthouse"
+                  name="room-type"
+                  value="luxury"
+                  onchange="updateRoomInfo('luxury')"
+                />
+                <label for="luxury-penthouse"
+                  >Luxury Penthouse (799.00 INR)</label
+                >
+              </div>
+              <div class="checkbox-item">
+                <input
+                  type="checkbox"
+                  class="check"
+                  id="dormitory"
+                  name="room-type"
+                  value="dormitory"
+                  onchange="updateRoomInfo('dormitory')"
+                />
+                <label for="dormitory">Dormitory (199.00 INR)</label>
+              </div>
+            </div>
+          </div>
+          <div id="room-info" class="room-info"></div>
+          <div class="form-group">
+            <label for="total-price">Total Price:</label>
+            <input type="text" id="total-price" name="total-price" readonly />
+          </div>
+          <div class="form-group">
+            <label for="requests">Special Requests:</label>
+            <textarea
+              id="requests"
+              name="requests"
+              rows="4"
+              placeholder="Enter any special requests"
+            ></textarea>
+          </div>
+          <div class="form-row full-width">
+            <button type="submit" class="btn">Pay Now</button>
+          </div>
+        </form>
+      </div>
+    </section>
+    <br />
+
+    <script src="/js/book.js"></script>
+  </body>
+</html>

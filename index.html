@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/flickity@2/dist/flickity.min.css"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+    <title>Kaju Farm Resort</title>
+
+
+
+
+    <style>
+      .carousel-cell {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        margin-top: 23px;
+      }
+
+      .carousel-cell::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 89%;
+        background-color: rgba(0, 0, 0, 0.6); /* Black overlay with opacity */
+      }
+
+      .carousel-cell img {
+        display: block;
+        width: 100%;
+        height: 89%;
+        object-fit: cover;
+      }
+
+      .header {
+        padding-top: 2rem;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+      }
+
+      .above {
+        position: absolute;
+        z-index: 2; /* Increased to make sure it stays above the overlay */
+      }
+
+      .section__container {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 5rem 1rem;
+      }
+
+      .header__container .section__subheader {
+        color: var(--white);
+         margin-left: 2rem;
+      }
+
+      .header__container h1 {
+        margin-bottom: 2rem;
+        font-size: 6rem;
+        font-weight: 800;
+        line-height: 7rem;
+        font-family: var(--header-font);
+        color: var(--white);
+        margin-left: 2rem;
+      }
+
+      .btn {
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+        color: var(--white);
+        background-color: var(--secondary-color);
+        outline: none;
+        border: none;
+        border-radius: 5px;
+         margin-left: 2rem;
+        cursor: pointer;
+      }
+
+      .main-carousel {
+        width: 100%;
+        height: 91.7vh;
+        overflow: hidden;
+         z-index: -1;
+        margin-top: -80px;
+      }
+
+      .carousel-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+
+      }
+
+      .carousel-dot {
+        width: 12px;
+        height: 12px;
+        background-color: white;
+        border-radius: 50%;
+        cursor: pointer;
+        opacity: 0.5;
+      }
+
+      .carousel-dot.active {
+        opacity: 1;
+        background-color: black; /* Bold dot for the active slide */
+      }
+
+      /* Media Queries */
+      @media (max-width: 1200px) {
+        .carousel-cell {
+          height: 80vh;
+        }
+
+        .header__container .section__subheader {
+          margin-left: 1.5rem;
+          font-size: 1.25rem;
+        }
+
+        .header__container h1 {
+          font-size: 5rem;
+          line-height: 6rem;
+          margin-left: 1.5rem;
+        }
+
+        .btn {
+          font-size: 0.875rem;
+          margin-left: 1.5rem;
+        }
+      }
+
+      @media (max-width: 992px) {
+        .carousel-cell {
+          height: 70vh;
+        }
+
+        .header__container .section__subheader {
+          margin-left: 1rem;
+          font-size: 1.125rem;
+        }
+
+        .header__container h1 {
+          font-size: 4rem;
+          line-height: 5rem;
+          margin-left: 1rem;
+        }
+
+        .btn {
+          font-size: 0.875rem;
+          margin-left: 1rem;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .carousel-cell {
+          height: 60vh;
+        }
+
+        .header__container .section__subheader {
+          margin-left: 1rem;
+          font-size: 1rem;
+        }
+
+        .header__container h1 {
+          font-size: 3.5rem;
+          line-height: 4.5rem;
+          margin-left: 1rem;
+        }
+
+        .btn {
+          font-size: 0.875rem;
+          margin-left: 1rem;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .carousel-cell {
+          height: 50vh;
+        }
+
+        .header__container .section__subheader {
+          margin-left: 0.5rem;
+          font-size: 1rem;
+        }
+
+        .header__container h1 {
+          font-size: 3rem;
+          line-height: 4rem;
+          margin-left: 0.5rem;
+        }
+
+        .btn {
+          font-size: 0.75rem;
+          padding: 0.5rem 1.5rem;
+          margin-left: 0.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .carousel-cell {
+          height: 50vh;
+        }
+
+        .main-carousel {
+          width: 100%;
+          height: 50vh;
+          overflow: hidden;
+           z-index: -1;
+        }
+
+
+        .carousel-cell::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 50vh;
+          background-color: rgba(0, 0, 0, 0.6); /* Black overlay with opacity */
+        }
+
+        .carousel-cell img {
+          display: block;
+          width: 100%;
+          height: 50vh;
+          object-fit: cover;
+        }
+
+        
+
+        .header__container .section__subheader {
+          margin-left: 0.5rem;
+          font-size: 0.875rem;
+        }
+
+        .header__container h1 {
+          font-size: 2.3rem;
+          line-height: 3rem;
+          margin-left: 0.5rem;
+        }
+
+        .btn {
+          font-size: 0.75rem;
+          padding: 0.5rem 1.5rem;
+          margin-left: 0.5rem;
+        }
+      }
+
+    </style>
+
+
+    
+  </head>
+  <body>
+    <nav>
+      <div class="nav__bar">
+        <div class="nav__header">
+          <div class="logo nav__logo">
+            <div>K</div>
+            <span>Kaju<br />Resort</span>
+          </div>
+          <div class="nav__menu__btn" id="menu-btn">
+            <i class="ri-menu-line"></i>
+          </div>
+        </div>
+        <ul class="nav__links" id="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="/pages/about.html">About</a></li>
+          <li><a href="/pages/reviews.html">Reviews</a></li>
+          <li><a href="/pages/gallery.html">Gallery</a></li>
+          <li><a href="/pages/contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+<br>
+
+
+    <header class="header">
+      <div class="above section__container header__container">
+        <p class="section__subheader">ABOUT US</p>
+        <h1>The Perfect<br />Base For You</h1>
+        <button class="btn">Take A Tour</button>
+      </div>
+      <!-- <div class="carousel-dots"></div> -->
+      <div class="main-carousel">
+        
+        <div class="carousel-cell">
+          <img src="/assets/g11.jpg" alt="Image 1" />
+        </div>
+        <div class="carousel-cell">
+          <img src="assets/crosal 2.jpeg" alt="Image 2" />
+        </div>
+        <div class="carousel-cell">
+          <img src="/assets/resort.jpg" alt="Image 3" />
+        </div>
+        <div class="carousel-cell">
+          <img src="assets/crosal1.jpeg" alt="Image 3" />
+        </div>
+        <div class="carousel-cell">
+          <img src="assets/i.jpeg" alt="Image 3" />
+        </div>
+      </div>
+      <!-- <div class="carousel-dots"></div> -->
+    </header>
+
+
+
+
+    
+    <!-- <header class="header">
+      <div class="above section__container header__container">
+        <p class="section__subheader">ABOUT US</p>
+        <h1>The Perfect<br />Base For You</h1>
+        <button class="btn">Take A Tour</button>
+      </div>
+      <div class="main-carousel">
+        <div class="carousel-cell">
+          <img src="/assets/g11.jpg" alt="Image 1" />
+        </div>
+        <div class="carousel-cell">
+          <img src="/assets/g11.jpg" alt="Image 2" />
+        </div>
+        <div class="carousel-cell">
+          <img src="/assets/resort.jpg" alt="Image 3" />
+        </div>
+      </div>
+    </header> -->
+
+    <section class="booking">
+      <div class="section__container booking__container">
+        <form id="bookingform" action="javascript:void(0)">
+          <div class="input__group">
+            <label for="arrival">Arrival Date</label>
+            <input
+              id="arrival"
+              type="text"
+              placeholder="Your Arrival Date (DD-MM-YYYY)"
+              required
+            />
+          </div>
+          <div class="input__group">
+            <label for="departure">Departure Date</label>
+            <input
+              id="departure"
+              type="text"
+              placeholder="Your Departure Date (DD-MM-YYYY)"
+            />
+          </div>
+          <div class="input__group">
+            <label for="guests">Guests</label>
+            <input id="guests" type="text" placeholder="No Of Guests" />
+          </div>
+          <input
+            type="submit"
+            class="btn"
+            onclick="checkAvailability()"
+            value="Check Availability"
+          />
+        </form>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="section__container about__container">
+        <div class="about__grid">
+          <div class="about__image">
+            <img src="assets/roomhd2.jpg" alt="about" />
+          </div>
+          <div class="about__card">
+            <span><i class="ri-user-line"></i></span>
+            <h4>Strong Team</h4>
+            <p>
+              Unlocking Hospitality Excellence And Ensures Your Perfect Stay
+            </p>
+          </div>
+          <div class="about__image">
+            <img src="assets/roomhd.jpg" alt="about" />
+          </div>
+          <div class="about__card">
+            <span><i class="ri-calendar-check-line"></i></span>
+            <h4>Luxury Room</h4>
+            <p>Experience Unrivaled Luxury at Our Exquisite Luxury Rooms</p>
+          </div>
+        </div>
+        <div class="about__content">
+          <p class="section__subheader">ABOUT US</p>
+          <h2 class="section__header">Discover Our Underground</h2>
+          <p class="section__description">
+            Welcome to a hidden realm of extraordinary accommodations where
+            luxury, comfort, and adventure converge. Our underground hotels
+            offer an unparalleled escape from the ordinary, inviting you to
+            explore a subterranean world of wonders.
+          </p>
+          <a href="/pages/book.html">
+            <button class="btn">Book Now</button>
+          </a>
+          <!-- <button class="btn">Book Now</button> -->
+        </div>
+      </div>
+    </section>
+
+    <section class="room__container" id="room">
+      <p class="section__subheader">ROOMS</p>
+      <h2 class="section__header">Hand Picked Rooms</h2>
+      <div class="room__grid">
+        <div class="room__card">
+          <img src="assets/roomhd2.jpg" alt="room" />
+          <div class="room__card__details">
+            <div>
+              <h4>First Suite</h4>
+              <p>Well-appointed rooms designed for guests who desire a more.</p>
+            </div>
+            <button class="btn">Book Now</button>
+          </div>
+        </div>
+        <div class="room__card">
+          <img src="assets/room02.jpg" alt="room" />
+          <div class="room__card__details">
+            <div>
+              <h4>Second Suite</h4>
+              <p>Consist of multiple rooms and a common living area.</p>
+            </div>
+            <button class="btn">Book Now</button>
+          </div>
+        </div>
+        <div class="room__card">
+          <img src="assets/roomhd3.jpg" alt="room" />
+          <div class="room__card__details">
+            <div>
+              <h4>Luxury Penthouse</h4>
+              <p>
+                Top-tier accommodations usually on the highest floors of a
+                hotel.
+              </p>
+            </div>
+            <button class="btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro">
+      <div class="section__container intro__container">
+        <div class="intro__cotent">
+          <p class="section__subheader">INTRO VIDEO</p>
+          <h2 class="section__header">Meet With Our Luxury Place</h2>
+          <p class="section__description">
+            Whether you're seeking a cozy and exclusive hideaway or an immersive
+            journey beneath the surface, KAJU RESORT promises to be an
+            unforgettable stay, where the depths of comfort and excitement await
+            your arrival.
+          </p>
+          <button class="btn">Book Now</button>
+        </div>
+        <div class="intro__video">
+          <video src="assets/resort_video.mp4" autoplay muted loop></video>
+        </div>
+      </div>
+    </section>
+
+    <section class="section__container feature__container" id="feature">
+      <p class="section__subheader">FACILITIES</p>
+      <h2 class="section__header">Core Features</h2>
+      <div class="feature__grid">
+        <div class="feature__card">
+          <span><i class="ri-thumb-up-line"></i></span>
+          <h4>Have High Rating</h4>
+          <p>
+            We take pride in curating a selection of hotels that consistently
+            receive high ratings and positive reviews.
+          </p>
+        </div>
+        <div class="feature__card">
+          <span><i class="ri-time-line"></i></span>
+          <h4>Quite Hours</h4>
+          <p>
+            We understand that peace and uninterrupted rest are essential for a
+            rejuvenating experience.
+          </p>
+        </div>
+        <div class="feature__card">
+          <span><i class="ri-map-pin-line"></i></span>
+          <h4>Best Location</h4>
+          <p>
+            At our hotel booking website, we take pride in offering
+            accommodations in the most prime and sought-after locations.
+          </p>
+        </div>
+        <div class="feature__card">
+          <span><i class="ri-close-circle-line"></i></span>
+          <h4>Free Cancellation</h4>
+          <p>
+            We understand that travel plans can change unexpectedly, which is
+            why we offer the flexibility of free cancellation.
+          </p>
+        </div>
+        <div class="feature__card">
+          <span><i class="ri-wallet-line"></i></span>
+          <h4>Payment Options</h4>
+          <p>
+            Our hotel booking website offers a range of convenient payment
+            options to suit your preferences.
+          </p>
+        </div>
+        <div class="feature__card">
+          <span><i class="ri-coupon-line"></i></span>
+          <h4>Special Offers</h4>
+          <p>
+            Whether you're planning a romantic getaway, or a business trip, our
+            carefully curated special offers cater to all your needs.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="menu" id="menu">
+      <div class="section__container menu__container">
+        <div class="menu__header">
+          <div>
+            <p class="section__subheader">MENU</p>
+            <h2 class="section__header">Our Food Menu</h2>
+          </div>
+          <div class="section__nav">
+            <span><i class="ri-arrow-left-line"></i></span>
+            <span><i class="ri-arrow-right-line"></i></span>
+          </div>
+        </div>
+        <ul class="menu__items">
+          <li>
+            <img src="assets/special-mutton-thali.jpg" alt="menu" />
+            <div class="menu__details">
+              <h4>MUTTON THALI</h4>
+              <p>
+                Experience a culinary journey with our Mutton Thali, offering a
+                perfect blend of spices and traditional Indian delicacies.
+              </p>
+            </div>
+          </li>
+          <li>
+            <img src="assets/misal.jpeg" alt="menu" />
+            <div class="menu__details">
+              <h4>MISAL PAV</h4>
+              <p>
+                Relish the vibrant flavors of Misal Pav, where crunchy farsan
+                meets a zesty curry, all perfectly paired with soft, buttery
+                pav.
+              </p>
+            </div>
+          </li>
+          <li>
+            <img src="assets/kaju kruma.jpg" alt="menu" />
+            <div class="menu__details">
+              <h4>KAJU KORMA</h4>
+              <p>
+                Savor the rich and creamy delight of Kaju Korma, where cashews
+                and aromatic spices create a symphony of flavors.
+              </p>
+            </div>
+          </li>
+          <li>
+            <img src="assets/wang.jpg" alt="menu" />
+            <div class="menu__details">
+              <h4>WANGYACHI THALI</h4>
+              <p>
+                Delight in the cultural richness of Waganchi Thali, a feast that
+                brings together a medley of regional specialties and home-cooked
+                goodness.
+              </p>
+            </div>
+          </li>
+          <li>
+            <img src="assets/chicken-thali-with-tambda.jpg" alt="menu" />
+            <div class="menu__details">
+              <h4>CHICKEN THALI</h4>
+              <p>
+                Savor the essence of Indian cuisine with our Chicken Thali, a
+                sumptuous feast that brings together rich, aromatic curries and
+                wholesome accompaniments.
+              </p>
+            </div>
+          </li>
+          <li>
+            <img src="assets/pohe.jpg" alt="menu" />
+            <div class="menu__details">
+              <h4>POHE</h4>
+              <p>
+                Experience the simple yet delightful taste of Pohe, a classic
+                Maharashtrian snack made with flattened rice, peanuts, and a
+                hint of lemon.
+              </p>
+            </div>
+          </li>
+        </ul>
+        <div class="menu__images">
+          <img src="assets/menu_misal.webp" alt="menu" />
+          <img src="assets/chicken-thali-with-tambda.jpg" alt="menu" />
+          <img src="assets/menu_pohe.webp" alt="menu" />
+        </div>
+        <ul class="menu__banner">
+          <li>
+            <span><i class="ri-restaurant-line"></i></span>
+            <h4>11+</h4>
+            <p>Dining Options</p>
+          </li>
+          <li>
+            <span><i class="ri-user-smile-line"></i></span>
+            <h4>400+</h4>
+            <p>Happy Guests</p>
+          </li>
+          <li>
+            <span><i class="ri-wifi-line"></i></span>
+            <h4>Free</h4>
+            <p>High speed Wifi</p>
+          </li>
+          <li>
+            <span><i class="ri-run-line"></i></span>
+            <h4>25+</h4>
+            <p>Outdoor Activies</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section__container news__container" id="news">
+      <div class="news__header">
+        <div>
+          <p class="section__subheader">BLOG</p>
+          <h2 class="section__header">Near by places</h2>
+        </div>
+        <div class="section__nav">
+          <span><i class="ri-arrow-left-line"></i></span>
+          <span><i class="ri-arrow-right-line"></i></span>
+        </div>
+      </div>
+      <div class="news__grid">
+        <div class="news__card">
+          <img src="assets/WATERFALL1.jpeg" alt="news" />
+          <div class="news__card__title">
+            <p>WATERFALL</p>
+            <p>By Suyash</p>
+          </div>
+          <h4>
+            Each drop of the waterfall is a testament to the relentless power
+            and serene beauty of nature.
+          </h4>
+          <p>
+            Join Suyash as he takes you on a gastronomic adventure through the
+            neighborhood surrounding our resort.
+          </p>
+        </div>
+
+        <div class="news__card">
+          <img src="assets/patgav-dam.jpg" alt="news" />
+          <div class="news__card__title">
+            <p>PATGAON DAM</p>
+            <p>By Yuvraj</p>
+          </div>
+          <h4>Balancing Mind, Body, and Soul at Our Resort.</h4>
+          <p>
+            In the heart of the backwaters, time slows down, and the world feels
+            gently cradled by the embrace of water and sky.
+          </p>
+        </div>
+
+        <div class="news__card">
+          <img src="assets/radha.1.jpeg" alt="news" />
+          <div class="news__card__title">
+            <p>Radhanagri  Sanctuary</p>
+            <p>By Yuvraj</p>
+          </div>
+          <h4>"In the heart of the wilderness lies a sanctuary, where nature whispers its secrets and time stands still." </h4>
+          <p>
+            It serves as a haven where external disturbances are minimized, allowing for preservation, peace, or contemplation.
+
+.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="section__container footer__container">
+        <div class="footer__col">
+          <div class="logo footer__logo">
+            <div>K</div>
+            <span>Kaju<br />Resort</span>
+          </div>
+          <p class="section__description">
+            Kaju Resort is a serene getaway nestled amidst nature, offering a
+            perfect blend of luxury and tranquility. With its lush surroundings
+            and top-notch amenities, it's an ideal destination for those looking
+            to relax and rejuvenate.
+          </p>
+          <ul class="footer__socials">
+            <li>
+              <a href="#"><i class="ri-youtube-fill"></i></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/kaju_farm_" target="_blank"
+                ><i class="ri-instagram-line"></i
+              ></a>
+            </li>
+            <li>
+              <a
+                href="https://www.facebook.com/people/Kaju-Farm/100092684679104/?mibextid=LQQJ4d"
+                target="_blank"
+                ><i class="ri-facebook-fill"></i
+              ></a>
+            </li>
+            <li>
+              <a
+                href="https://api.whatsapp.com/send?phone=919172121327&text=I'm%20interested%20in%20your%20services"
+                target="_blank"
+                ><i class="ri-whatsapp-fill"></i
+              ></a>
+            </li>
+          </ul>
+          <br />
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3832.0446516880256!2d74.06856097460192!3d16.166647536823678!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc0650bb046fda5%3A0x1f8073ab23b79db!2sKaju%20farm%20resort!5e0!3m2!1sen!2sin!4v1720012199351!5m2!1sen!2sin"
+            width="350"
+            height="250"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+            margin="10px"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+        <div class="footer__col">
+          <h4>Services</h4>
+          <div class="footer__links">
+            <li><a href="#">Online Booking</a></li>
+            <li><a href="#">Room Customization</a></li>
+            <li><a href="#">Virtual Tours</a></li>
+            <li><a href="#">Special Offers</a></li>
+            <li><a href="#">Concierge Services</a></li>
+            <li><a href="#">Customer Support</a></li>
+          </div>
+        </div>
+        <div class="footer__col">
+          <h4>Contact Us</h4>
+          <div class="footer__links">
+            <li>
+              <span><i class="ri-phone-fill"></i></span>
+              <div>
+                <h5>Phone Number</h5>
+                <p>+91 93256 57474</p>
+                <p>+91 8956175236</p>
+              </div>
+            </li>
+            <li>
+              <span><i class="ri-record-mail-line"></i></span>
+              <div>
+                <h5>Email</h5>
+                <a href="mailto:kajuresort@gmail.com"> kajuresort@gmail.com</a>
+              </div>
+            </li>
+            <li>
+              <span><i class="ri-map-pin-2-fill"></i></span>
+              <div>
+                <h5>Location</h5>
+                <p>
+                  Kaju Resort, Vesrade Near Kadgaon Budhrgadh Taluka Near
+                  Gargoti, Kolhapur, India, Maharashtra
+                </p>
+              </div>
+            </li>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bar">Copyright © 2024 All rights reserved.</div>
+    </footer>
+
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
